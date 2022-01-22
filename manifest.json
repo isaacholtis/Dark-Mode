@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 2,
+  "name": "Dark Mode",
+  "version": "1.0",
+  "homepage_url": "",
+  "description": "Force dark mode for all web pages.",
+
+  "icons": {
+    "48": "icons/darkmode-48.png"
+  },
+
+  "content_scripts": [
+    {
+      "js": ["main.js"]
+    }
+  ]
+
+}
+
