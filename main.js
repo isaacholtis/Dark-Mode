@@ -27,7 +27,7 @@ for (i = 0; i < getAtributes.length; i++) {
         hasDarkAttribute = true
     }
 }
-const exceptionsList = ["about:blank", "ephy-about:overview"]
+const exceptionsList = ["ephy-about:overview", "https://www.reddit.com/"]
 let isException = window.location.href
 
 
@@ -49,9 +49,15 @@ if ((brightness > 128 || (brightness == 0 && hasDarkAttribute != true))
 
     // insert CSS Rule
     style.sheet.insertRule(`
-        img, video, picture, iframe {
+        img, video, iframe, [role=img]:not(svg), figure {
             filter: invert(1) hue-rotate(180deg);
+        picture {
+            filter: invert(1) hue-rotate(180deg);
+        }
         svg {
+            filter: invert(1) hue-rotate(180deg);
+        }
+        .error-body {
             filter: invert(1) hue-rotate(180deg);
         }
     `);
