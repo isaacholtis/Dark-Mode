@@ -27,7 +27,7 @@ for (i = 0; i < getAtributes.length; i++) {
         hasDarkAttribute = true
     }
 }
-const exceptionsList = ["ephy-about:overview", "https://www.reddit.com/"]
+const exceptionsList = ["ephy-about:overview", "www.reddit.com/", "app.element.io"]
 let isException = window.location.href
 
 
@@ -43,7 +43,23 @@ if ((brightness > 128 || (brightness == 0 && hasDarkAttribute != true))
     })
 
     html.style.filter = 'invert(1) hue-rotate(180deg)'
+    
+    // Select all elements with css background image
+    var tags = document.getElementsByTagName('*'),
+        el;
 
+    for (var i = 0, len = tags.length; i < len; i++) {
+        el = tags[i];
+        if (el.currentStyle) {
+            if( el.currentStyle['backgroundImage'] !== 'none' ) 
+                el.style = 'filter: invert(1) hue-rotate(180deg)'
+        }
+        else if (window.getComputedStyle) {
+            if( document.defaultView.getComputedStyle(el, null).getPropertyValue('background-image') !== 'none' ) 
+                el.style = 'filter: invert(1) hue-rotate(180deg)'
+        }
+    }
+    
     const style = document.createElement('style');
     document.head.appendChild(style);
 
@@ -51,9 +67,6 @@ if ((brightness > 128 || (brightness == 0 && hasDarkAttribute != true))
     style.sheet.insertRule(`
         img, video, iframe, [role=img]:not(svg), figure {
             filter: invert(1) hue-rotate(180deg);
-        picture {
-            filter: invert(1) hue-rotate(180deg);
-        }
         svg {
             filter: invert(1) hue-rotate(180deg);
         }
