@@ -37,14 +37,13 @@ for (i = 0; i < classException.classList.length; i++) {
     }
 }
 
-console.log(hasClassException)
-const exceptionsList = ["ephy-about:overview", "www.reddit.com/", "app.element.io"]
-let isException = window.location.href
+const exceptionsList = ["ephy-about:overview", "www.reddit.com/", "app.element.io", "www.twitch.tv"]
+function isException(site) {return window.location.href.includes(site)}
 
 
 
 if ((brightness > 128 || (brightness == 0 && !hasDarkAttribute))
-        && exceptionsList.includes(isException) == false) {
+        && exceptionsList.find(isException) == undefined) {
 
     if (hasClassException == undefined) {
 
@@ -88,6 +87,13 @@ if ((brightness > 128 || (brightness == 0 && !hasDarkAttribute))
             } 
             .navbar {
                 filter: invert(1) hue-rotate(180deg);
+            }
+
+            // specifics websites
+                // w3 schools
+            w3-code {
+                filter: invert(1) hue-rotate(180deg);
+
             }
         `);
 
