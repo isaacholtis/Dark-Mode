@@ -27,6 +27,7 @@ for (i = 0; i < getAtributes.length; i++) {
         hasDarkAttribute = true
     }
 }
+console.log(hasDarkAttribute, 'has dark')
 
 const classException = document.body
 const classExceptionList = ['error-body']
@@ -37,9 +38,11 @@ for (i = 0; i < classException.classList.length; i++) {
     }
 }
 
+console.log(hasClassException, 'has class')
+
 const exceptionsList = ["ephy-about:overview", "www.reddit.com/", "app.element.io", "www.twitch.tv"]
 function isException(site) {return window.location.href.includes(site)}
-
+console.log(exceptionsList.find(isException), 'site list')
 
 
 if ((brightness > 128 || (brightness == 0 && !hasDarkAttribute))
@@ -78,15 +81,15 @@ if ((brightness > 128 || (brightness == 0 && !hasDarkAttribute))
         // insert CSS Rule
         style.sheet.insertRule(`
             img, video, iframe, [role=img]:not(svg), figure {
-                filter: invert(1) hue-rotate(180deg);
+                filter: invert(1) hue-rotate(180deg) !important;
             svg {
-                filter: invert(1) hue-rotate(180deg);
+                filter: invert(1) hue-rotate(180deg) !important;
             }
             [role=article] {
-                filter: invert(1) hue-rotate(180deg);
+                filter: invert(1) hue-rotate(180deg) !important;
             } 
             .navbar {
-                filter: invert(1) hue-rotate(180deg);
+                filter: invert(1) hue-rotate(180deg) !important;
             }
 
             // specifics websites
