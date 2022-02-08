@@ -5,7 +5,8 @@
 ### Instalation
 
 1. [Enable Epiphany extension](https://github.com/GNOME-Web-Extensions/Get-Started/wiki#how-to-enable-extensions). _Optional if not done._
-2. Download the latest release from the [.xpi file](https://github.com/GNOME-Web-Extensions/Dark-Mode/releases/).
+2. Clone this repository.
+`git clone https://github.com/GNOME-Web-Extensions/Dark-Mode.git`
 3. Follow this [tutorial](https://github.com/GNOME-Web-Extensions/Get-Started/wiki#how-to-install-extensions).
 
 ## Roadmap
