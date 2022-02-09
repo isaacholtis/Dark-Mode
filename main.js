@@ -38,7 +38,7 @@ for (i = 0; i < classException.classList.length; i++) {
 }
 
 
-const exceptionsList = ["ephy-about:overview", "www.reddit.com/", "app.element.io", "www.twitch.tv", "twitter.com", "geeksforgeeks.org"]
+const exceptionsList = ["ephy-about:", "ephy-reader:", "www.reddit.com/", "app.element.io", "www.twitch.tv", "twitter.com", "geeksforgeeks.org"]
 const noExceptionsList = ["www.phoronix.com"]
 function isException(site) {return window.location.href.includes(site)}
 
@@ -84,15 +84,15 @@ function isException(site) {return window.location.href.includes(site)}
                         svg {
                             filter: invert(1) hue-rotate(180deg) !important;
                         }
+                        header {
+                            filter: invert(1) hue-rotate(180deg) !important;
+                        }
+                        header > img {
+                            filter: invert(1) hue-rotate(180deg) !important;
+                        }
                         [role=article] {
                             filter: invert(1) hue-rotate(180deg) !important;
                         } 
-                        .navbar {
-                            filter: invert(1) hue-rotate(180deg) !important;
-                        }
-                        p {
-                            filter: saturate(var(--value, 5))
-                        }
 
                         // specifics websites
                             // w3 schools
