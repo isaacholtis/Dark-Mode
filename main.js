@@ -38,69 +38,73 @@ for (i = 0; i < classException.classList.length; i++) {
 }
 
 
-const exceptionsList = ["ephy-about:overview", "www.reddit.com/", "app.element.io", "www.twitch.tv"]
+const exceptionsList = ["ephy-about:overview", "www.reddit.com/", "app.element.io", "www.twitch.tv", "twitter.com", "geeksforgeeks.org"]
+const noExceptionsList = ["www.phoronix.com"]
 function isException(site) {return window.location.href.includes(site)}
 
-console.log(hasDarkAttribute, 'has dark')
-console.log(hasClassException, 'has class')
-console.log(exceptionsList.find(isException), 'site list')
 
-if ((brightness > 128 || (brightness == 0 && hasDarkAttribute == undefined))
-        && exceptionsList.find(isException) == undefined) {
+    if ((brightness > 128 || brightness === 0) || noExceptionsList.find(isException) !== undefined) {
+        if (hasClassException == undefined) {
+            if (hasDarkAttribute == undefined) {
+                if (exceptionsList.find(isException) === undefined) {
+                    // emojis
+                    // document.getElementsByTagName('*').forEach((i)=>{
+                    //     if ((/\p{Emoji}/u.test(i.innerText))) {
+                    //         i.style.filter = 'invert(1) contrast(0.95) saturate(0.5) hue-rotate(180deg)'
+                    //     }
+                    // })
 
-    if (hasClassException == undefined) {
+                    html.style.filter = 'invert(1) hue-rotate(180deg)'
+                    
+                    // Select all elements with css background image
+                    var tags = document.getElementsByTagName('*'),
+                        el;
 
-        // emojis
-        document.querySelectorAll('p, span, gl-emoji').forEach((i)=>{
-            if ((/\p{Emoji}/u.test(i.innerText))) {
-                i.style.filter = 'invert(1) contrast(0.95) saturate(0.5) hue-rotate(180deg)'
+                    for (var i = 0, len = tags.length; i < len; i++) {
+                        el = tags[i];
+                        if (el.currentStyle) {
+                            if( el.currentStyle['backgroundImage'] !== 'none' ) 
+                                el.style = 'filter: invert(1) hue-rotate(180deg)'
+                                console.log('é o if')
+                        }
+                        else if (window.getComputedStyle) {
+                            if( document.defaultView.getComputedStyle(el, null).getPropertyValue('background-image') !== 'none' ) 
+                                el.style = 'filter: invert(1) hue-rotate(180deg)'
+                                console.log('é o else if')
+                        }
+                    }
+
+                    const style = document.createElement('style');
+                    document.head.appendChild(style);
+
+                    // insert CSS Rule
+                    style.sheet.insertRule(`
+                        img, video, iframe, [role=img]:not(svg) {
+                            filter: invert(1) hue-rotate(180deg) !important;
+                        svg {
+                            filter: invert(1) hue-rotate(180deg) !important;
+                        }
+                        [role=article] {
+                            filter: invert(1) hue-rotate(180deg) !important;
+                        } 
+                        .navbar {
+                            filter: invert(1) hue-rotate(180deg) !important;
+                        }
+                        p {
+                            filter: saturate(var(--value, 5))
+                        }
+
+                        // specifics websites
+                            // w3 schools
+                        w3-code {
+                            filter: invert(1) hue-rotate(180deg);
+
+                        }
+
+                    `);
+
+                }
             }
-        })
-
-        html.style.filter = 'invert(1) hue-rotate(180deg)'
-        
-        // Select all elements with css background image
-        var tags = document.getElementsByTagName('*'),
-            el;
-
-        for (var i = 0, len = tags.length; i < len; i++) {
-            el = tags[i];
-            if (el.currentStyle) {
-                if( el.currentStyle['backgroundImage'] !== 'none' ) 
-                    el.style = 'filter: invert(1) hue-rotate(180deg)'
-                    console.log('é o if')
             }
-            else if (window.getComputedStyle) {
-                if( document.defaultView.getComputedStyle(el, null).getPropertyValue('background-image') !== 'none' ) 
-                    el.style = 'filter: invert(1) hue-rotate(180deg)'
-                    console.log('é o else if')
-            }
-        }
-
-        const style = document.createElement('style');
-        document.head.appendChild(style);
-
-        // insert CSS Rule
-        style.sheet.insertRule(`
-            img, video, iframe, [role=img]:not(svg), figure {
-                filter: invert(1) hue-rotate(180deg) !important;
-            svg {
-                filter: invert(1) hue-rotate(180deg) !important;
-            }
-            [role=article] {
-                filter: invert(1) hue-rotate(180deg) !important;
-            } 
-            .navbar {
-                filter: invert(1) hue-rotate(180deg) !important;
-            }
-
-            // specifics websites
-                // w3 schools
-            w3-code {
-                filter: invert(1) hue-rotate(180deg);
-
-            }
-        `);
 
     }
-}
